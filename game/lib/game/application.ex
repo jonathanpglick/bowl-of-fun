@@ -8,7 +8,7 @@ defmodule Game.Application do
     ]
 
     opts = [
-      name: Game.Supervisor,
+      name: Games.Supervisor,
       strategy: :simple_one_for_one
     ]
 

@@ -73,22 +73,20 @@ defmodule Game.Instance do
     %Game.Instance{game | turn_time_left: turn_time_left - 1}
   end
 
-  def turn_paper_guessed(game = %Game.Instance{round_papers: [_], turn_state: :active}) do
+  def paper_guessed(game = %Game.Instance{round_papers: [_], turn_state: :active}) do
     game
     |> Map.put(:round_papers, [])
     |> current_team_add_score(1)
     |> turn_over()
   end
 
-  def turn_paper_guessed(
-        game = %Game.Instance{round_papers: [_ | next_papers], turn_state: :active}
-      ) do
+  def paper_guessed(game = %Game.Instance{round_papers: [_ | next_papers], turn_state: :active}) do
     game
     |> Map.put(:round_papers, next_papers)
     |> current_team_add_score(1)
   end
 
-  def turn_paper_guessed(game = %Game.Instance{}) do
+  def paper_guessed(game = %Game.Instance{}) do
     game
   end
 

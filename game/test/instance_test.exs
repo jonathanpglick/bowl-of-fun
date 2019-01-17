@@ -43,7 +43,7 @@ defmodule GameInstanceTest do
 
   test "turn paper guessed" do
     game = sample_game() |> Game.Instance.start() |> Game.Instance.turn_start()
-    game = game |> Game.Instance.turn_paper_guessed()
+    game = game |> Game.Instance.paper_guessed()
     assert length(game.round_papers) == length(game.papers) - 1
   end
 
@@ -54,16 +54,16 @@ defmodule GameInstanceTest do
     game =
       game
       |> Game.Instance.turn_start()
-      |> Game.Instance.turn_paper_guessed()
-      |> Game.Instance.turn_paper_guessed()
+      |> Game.Instance.paper_guessed()
+      |> Game.Instance.paper_guessed()
 
     assert game.round == :charades
 
     game =
       game
       |> Game.Instance.turn_start()
-      |> Game.Instance.turn_paper_guessed()
-      |> Game.Instance.turn_paper_guessed()
+      |> Game.Instance.paper_guessed()
+      |> Game.Instance.paper_guessed()
 
     assert game.round == :one_word
   end
@@ -75,8 +75,8 @@ defmodule GameInstanceTest do
     game =
       game
       |> Game.Instance.turn_start()
-      |> Game.Instance.turn_paper_guessed()
-      |> Game.Instance.turn_paper_guessed()
+      |> Game.Instance.paper_guessed()
+      |> Game.Instance.paper_guessed()
 
     assert Enum.at(game.teams, 0).score == 2
     team2 = game |> Game.Instance.current_team()
@@ -85,11 +85,11 @@ defmodule GameInstanceTest do
     game =
       game
       |> Game.Instance.turn_start()
-      |> Game.Instance.turn_paper_guessed()
-      |> Game.Instance.turn_paper_guessed()
+      |> Game.Instance.paper_guessed()
+      |> Game.Instance.paper_guessed()
 
-    game = game |> Game.Instance.turn_paper_guessed()
-    game = game |> Game.Instance.turn_paper_guessed()
+    game = game |> Game.Instance.paper_guessed()
+    game = game |> Game.Instance.paper_guessed()
 
     team3 = game |> Game.Instance.current_team()
     assert team.name === team3.name
@@ -101,14 +101,14 @@ defmodule GameInstanceTest do
       sample_game()
       |> Game.Instance.start()
       |> Game.Instance.turn_start()
-      |> Game.Instance.turn_paper_guessed()
-      |> Game.Instance.turn_paper_guessed()
+      |> Game.Instance.paper_guessed()
+      |> Game.Instance.paper_guessed()
       |> Game.Instance.turn_start()
-      |> Game.Instance.turn_paper_guessed()
-      |> Game.Instance.turn_paper_guessed()
+      |> Game.Instance.paper_guessed()
+      |> Game.Instance.paper_guessed()
       |> Game.Instance.turn_start()
-      |> Game.Instance.turn_paper_guessed()
-      |> Game.Instance.turn_paper_guessed()
+      |> Game.Instance.paper_guessed()
+      |> Game.Instance.paper_guessed()
 
     assert game.state == :finished
     assert game.teams |> Enum.at(0) |> Map.get(:score) == 4
