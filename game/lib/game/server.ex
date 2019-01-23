@@ -2,13 +2,13 @@ defmodule Game.Server do
   use GenServer
 
   # Outside API.
-  def start_link() do
-    GenServer.start_link(__MODULE__, nil)
+  def start_link(callback_pid) do
+    GenServer.start_link(__MODULE__, callback_pid)
   end
 
   # Inside API.
-  def init(_) do
-    {:ok, Game.Instance.new()}
+  def init(callback_pid) do
+    {:ok, Game.Instance.new(callback_pid)}
   end
 
   def handle_call({:add_team, team_name}, _from, game) do
