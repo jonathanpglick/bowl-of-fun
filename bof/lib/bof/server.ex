@@ -1,5 +1,6 @@
 defmodule Bof.Server do
   use GenServer
+  alias Bof.Game
 
   # Outside API.
   def start_link(callback_pid) do
@@ -8,41 +9,41 @@ defmodule Bof.Server do
 
   # Inside API.
   def init(callback_pid) do
-    {:ok, Bof.Game.new(callback_pid)}
+    {:ok, Game.new(callback_pid)}
   end
 
   def handle_call({:add_team, team_name}, _from, game) do
     game
-    |> Bof.Game.add_team(team_name)
+    |> Game.add_team(team_name)
     |> handle_call_return()
   end
 
   def handle_call({:add_paper, paper}, _from, game) do
     game
-    |> Bof.Game.add_paper(paper)
+    |> Game.add_paper(paper)
     |> handle_call_return()
   end
 
   def handle_call({:can_start?}, _from, game) do
-    {:reply, Bof.Game.can_start?(game), game}
+    {:reply, Game.can_start?(game), game}
   end
 
   def handle_call({:start}, _from, game) do
     game
-    |> Bof.Game.start()
+    |> Game.start()
     |> handle_call_return()
   end
 
   def handle_call({:turn_start}, _from, game) do
     game
-    |> Bof.Game.turn_start()
+    |> Game.turn_start()
     |> set_tick()
     |> handle_call_return()
   end
 
   def handle_call({:paper_guessed}, _from, game) do
     game
-    |> Bof.Game.paper_guessed()
+    |> Game.paper_guessed()
     |> handle_call_return()
   end
 
@@ -53,7 +54,7 @@ defmodule Bof.Server do
   def handle_info({:turn_tick}, game) do
     game =
       game
-      |> Bof.Game.turn_tick()
+      |> Game.turn_tick()
       |> set_tick()
 
     {:noreply, game}
@@ -66,7 +67,7 @@ defmodule Bof.Server do
   defp game_to_external_state(game) do
     %{
       teams: game.teams,
-      current_team: game |> Bof.Game.current_team(),
+      current_team: game |> Game.current_team(),
       round: game.round,
       current_paper: game |> current_paper(),
       state: game.state,

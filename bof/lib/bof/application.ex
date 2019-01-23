@@ -8,7 +8,7 @@ defmodule Bof.Application do
     ]
 
     opts = [
-      name: Bofs.Supervisor,
+      name: Bof.Supervisor,
       strategy: :simple_one_for_one
     ]
 

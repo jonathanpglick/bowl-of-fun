@@ -1,6 +1,6 @@
-defmodule Game do
+defmodule Bof do
   def new_game(callback_pid \\ nil) do
-    {:ok, pid} = Supervisor.start_child(Games.Supervisor, [callback_pid])
+    {:ok, pid} = Supervisor.start_child(Bof.Supervisor, [callback_pid])
     pid
   end
 
