@@ -1,14 +1,14 @@
-defmodule Game.Application do
+defmodule Bof.Application do
   use Application
   import Supervisor.Spec
 
   def start(_type, _args) do
     children = [
-      worker(Game.Server, [])
+      worker(Bof.Server, [])
     ]
 
     opts = [
-      name: Games.Supervisor,
+      name: Bofs.Supervisor,
       strategy: :simple_one_for_one
     ]
 

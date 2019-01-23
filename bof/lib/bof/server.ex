@@ -1,4 +1,4 @@
-defmodule Game.Server do
+defmodule Bof.Server do
   use GenServer
 
   # Outside API.
@@ -8,41 +8,41 @@ defmodule Game.Server do
 
   # Inside API.
   def init(callback_pid) do
-    {:ok, Game.Instance.new(callback_pid)}
+    {:ok, Bof.Game.new(callback_pid)}
   end
 
   def handle_call({:add_team, team_name}, _from, game) do
     game
-    |> Game.Instance.add_team(team_name)
+    |> Bof.Game.add_team(team_name)
     |> handle_call_return()
   end
 
   def handle_call({:add_paper, paper}, _from, game) do
     game
-    |> Game.Instance.add_paper(paper)
+    |> Bof.Game.add_paper(paper)
     |> handle_call_return()
   end
 
   def handle_call({:can_start?}, _from, game) do
-    {:reply, Game.Instance.can_start?(game), game}
+    {:reply, Bof.Game.can_start?(game), game}
   end
 
   def handle_call({:start}, _from, game) do
     game
-    |> Game.Instance.start()
+    |> Bof.Game.start()
     |> handle_call_return()
   end
 
   def handle_call({:turn_start}, _from, game) do
     game
-    |> Game.Instance.turn_start()
+    |> Bof.Game.turn_start()
     |> set_tick()
     |> handle_call_return()
   end
 
   def handle_call({:paper_guessed}, _from, game) do
     game
-    |> Game.Instance.paper_guessed()
+    |> Bof.Game.paper_guessed()
     |> handle_call_return()
   end
 
@@ -53,7 +53,7 @@ defmodule Game.Server do
   def handle_info({:turn_tick}, game) do
     game =
       game
-      |> Game.Instance.turn_tick()
+      |> Bof.Game.turn_tick()
       |> set_tick()
 
     {:noreply, game}
@@ -66,7 +66,7 @@ defmodule Game.Server do
   defp game_to_external_state(game) do
     %{
       teams: game.teams,
-      current_team: game |> Game.Instance.current_team(),
+      current_team: game |> Bof.Game.current_team(),
       round: game.round,
       current_paper: game |> current_paper(),
       state: game.state,
