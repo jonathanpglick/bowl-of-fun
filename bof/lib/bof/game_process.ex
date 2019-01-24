@@ -1,4 +1,4 @@
-defmodule Bof.Server do
+defmodule Bof.GameProcess do
   use GenServer
   alias Bof.Game
 

@@ -1,6 +1,8 @@
 defmodule Bof do
   def new_game(callback_pid \\ nil) do
-    {:ok, pid} = Supervisor.start_child(Bof.Supervisor, [callback_pid])
+    {:ok, pid} =
+      DynamicSupervisor.start_child(Bof.GameSupervisor, {Bof.GameProcess, [callback_pid]})
+
     pid
   end
 

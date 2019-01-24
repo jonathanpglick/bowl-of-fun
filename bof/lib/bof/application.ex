@@ -1,15 +1,14 @@
 defmodule Bof.Application do
   use Application
-  import Supervisor.Spec
 
   def start(_type, _args) do
     children = [
-      worker(Bof.Server, [])
+      {DynamicSupervisor, strategy: :one_for_one, name: Bof.GameSupervisor}
     ]
 
     opts = [
       name: Bof.Supervisor,
-      strategy: :simple_one_for_one
+      strategy: :one_for_one
     ]
 
     Supervisor.start_link(children, opts)
