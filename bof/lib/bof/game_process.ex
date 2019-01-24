@@ -3,8 +3,12 @@ defmodule Bof.GameProcess do
   alias Bof.Game
 
   # Outside API.
-  def start_link(callback_pid) do
-    GenServer.start_link(__MODULE__, callback_pid)
+  def start_link([shortcode, callback_pid]) do
+    GenServer.start_link(__MODULE__, callback_pid, name: via_tuple(shortcode))
+  end
+
+  def via_tuple(shortcode) do
+    {:via, Registry, {Bof.GameRegistry, shortcode}}
   end
 
   # Inside API.

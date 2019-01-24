@@ -1,7 +1,10 @@
 defmodule Bof do
-  def new_game(callback_pid \\ nil) do
+  def new_game(shortcode \\ "test", callback_pid \\ nil) do
     {:ok, pid} =
-      DynamicSupervisor.start_child(Bof.GameSupervisor, {Bof.GameProcess, [callback_pid]})
+      DynamicSupervisor.start_child(
+        Bof.GameSupervisor,
+        {Bof.GameProcess, [shortcode, callback_pid]}
+      )
 
     pid
   end

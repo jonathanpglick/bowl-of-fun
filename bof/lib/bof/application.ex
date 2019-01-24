@@ -3,7 +3,8 @@ defmodule Bof.Application do
 
   def start(_type, _args) do
     children = [
-      {DynamicSupervisor, strategy: :one_for_one, name: Bof.GameSupervisor}
+      {DynamicSupervisor, strategy: :one_for_one, name: Bof.GameSupervisor},
+      {Registry, name: Bof.GameRegistry, keys: :unique, strategy: :one_for_one}
     ]
 
     opts = [
