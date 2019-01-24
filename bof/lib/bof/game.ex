@@ -4,6 +4,7 @@ defmodule Bof.Game do
 
   defstruct(
     callback_pid: nil,
+    shortcode: nil,
     # | :active | :finished
     state: :initializing,
     teams: [],
@@ -17,9 +18,10 @@ defmodule Bof.Game do
     turn_time_left: 60
   )
 
-  def new(callback_pid \\ nil) do
+  def new(shortcode \\ nil, callback_pid \\ nil) do
     %Game{
-      callback_pid: callback_pid
+      callback_pid: callback_pid,
+      shortcode: shortcode
     }
   end
 

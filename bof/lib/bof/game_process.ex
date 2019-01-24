@@ -3,8 +3,9 @@ defmodule Bof.GameProcess do
   alias Bof.Game
 
   # Outside API.
-  def start_link([shortcode, callback_pid]) do
-    GenServer.start_link(__MODULE__, callback_pid, name: via_tuple(shortcode))
+  def start_link([callback_pid]) do
+    shortcode = Shortcode.get_next()
+    GenServer.start_link(__MODULE__, [shortcode, callback_pid], name: via_tuple(shortcode))
   end
 
   def via_tuple(shortcode) do
@@ -12,8 +13,8 @@ defmodule Bof.GameProcess do
   end
 
   # Inside API.
-  def init(callback_pid) do
-    {:ok, Game.new(callback_pid)}
+  def init([shortcode, callback_pid]) do
+    {:ok, Game.new(shortcode, callback_pid)}
   end
 
   def handle_call({:add_team, team_name}, _from, game) do
@@ -70,6 +71,7 @@ defmodule Bof.GameProcess do
 
   defp game_to_external_state(game) do
     %{
+      shortcode: game.shortcode,
       teams: game.teams,
       current_team: game |> Game.current_team(),
       round: game.round,

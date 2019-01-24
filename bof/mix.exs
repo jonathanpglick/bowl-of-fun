@@ -19,6 +19,8 @@ defmodule Game.MixProject do
   end
 
   defp deps do
-    []
+    [
+      {:shortcode, path: "../shortcode"}
+    ]
   end
 end
