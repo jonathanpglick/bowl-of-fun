@@ -20,12 +20,14 @@ defmodule Bof.GameProcess do
   def handle_call({:add_team, team_name}, _from, game) do
     game
     |> Game.add_team(team_name)
+    |> send_changed()
     |> handle_call_return()
   end
 
   def handle_call({:add_paper, paper}, _from, game) do
     game
     |> Game.add_paper(paper)
+    |> send_changed()
     |> handle_call_return()
   end
 
@@ -36,12 +38,14 @@ defmodule Bof.GameProcess do
   def handle_call({:start}, _from, game) do
     game
     |> Game.start()
+    |> send_changed()
     |> handle_call_return()
   end
 
   def handle_call({:turn_start}, _from, game) do
     game
     |> Game.turn_start()
+    |> send_changed()
     |> set_tick()
     |> handle_call_return()
   end
@@ -49,6 +53,7 @@ defmodule Bof.GameProcess do
   def handle_call({:paper_guessed}, _from, game) do
     game
     |> Game.paper_guessed()
+    |> send_changed()
     |> handle_call_return()
   end
 
@@ -60,6 +65,7 @@ defmodule Bof.GameProcess do
     game =
       game
       |> Game.turn_tick()
+      |> send_changed()
       |> set_tick()
 
     {:noreply, game}
@@ -68,6 +74,13 @@ defmodule Bof.GameProcess do
   def handle_call_return(game) do
     {:reply, game_to_external_state(game), game}
   end
+
+  def send_changed(game = %{callback_pid: callback_pid}) when is_pid(callback_pid) do
+    send(callback_pid, {:changed, game_to_external_state(game)})
+    game
+  end
+
+  def send_changed(game), do: game
 
   defp game_to_external_state(game) do
     %{
