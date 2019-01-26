@@ -2,6 +2,8 @@ defmodule Bof.GameProcess do
   use GenServer
   alias Bof.Game
 
+  @game_registry Bof.GameRegistry
+
   # Outside API.
   def start_link([callback_pid]) do
     shortcode = Shortcode.get_next()
@@ -9,7 +11,7 @@ defmodule Bof.GameProcess do
   end
 
   def via_tuple(shortcode) do
-    {:via, Registry, {Bof.GameRegistry, shortcode}}
+    {:via, Registry, {@game_registry, shortcode}}
   end
 
   # Inside API.

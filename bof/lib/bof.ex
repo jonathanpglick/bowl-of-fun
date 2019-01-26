@@ -1,4 +1,6 @@
 defmodule Bof do
+  @game_registry Bof.GameRegistry
+
   def new_game(callback_pid \\ nil) do
     {:ok, pid} =
       DynamicSupervisor.start_child(
@@ -60,6 +62,6 @@ defmodule Bof do
   end
 
   def via_tuple(shortcode) do
-    {:via, Registry, {Bof.GameRegistry, shortcode}}
+    {:via, Registry, {@game_registry, shortcode}}
   end
 end
