@@ -1,7 +1,8 @@
 defmodule Shortcode.Worker do
   use GenServer
   @me __MODULE__
-  @coder Hashids.new()
+  @alphabet "abcdefghijklmnopqrstuvwxyz"
+  @coder Hashids.new(alphabet: @alphabet)
 
   # Outside API.
   def start_link(_arg) do
