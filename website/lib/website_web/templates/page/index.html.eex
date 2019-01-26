@@ -1,0 +1,8 @@
+<h2>Join a game</h2>
+<%= form_for(@conn, Routes.page_path(@conn, :join_game), [], fn f -> %>
+  <%= text_input(f, :shortcode) %>
+  <%= submit("Join") %>
+<% end) %>
+
+<h2>- or -</h2>
+<%= button("Start a new game", to: Routes.page_path(@conn, :new_game)) %>
