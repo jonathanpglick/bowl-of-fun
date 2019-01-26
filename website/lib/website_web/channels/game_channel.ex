@@ -7,15 +7,20 @@ defmodule WebsiteWeb.GameChannel do
   end
 
   def handle_in("state", _, socket) do
-    game = Bof.state(socket.assigns.shortcode)
-    push(socket, "changed", game)
+    socket.assigns.shortcode
+    |> Bof.state()
+
     {:noreply, socket}
   end
 
   def handle_in("add_team", team_name, socket) do
-    shortcode = socket.assigns.shortcode
-    game = Bof.add_team(shortcode, team_name)
-    push(socket, "changed", game)
+    socket.assigns.shortcode
+    |> Bof.add_team(team_name)
+
     {:noreply, socket}
+  end
+
+  def broadcast_changed(game) do
+    WebsiteWeb.Endpoint.broadcast!("game:#{game.shortcode}", "changed", game)
   end
 end

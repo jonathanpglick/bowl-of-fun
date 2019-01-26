@@ -1,17 +1,12 @@
 defmodule Website.Application do
   use Application
 
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
   def start(_type, _args) do
     import Supervisor.Spec
 
-    # Define workers and child supervisors to be supervised
     children = [
-      # Start the endpoint when the application starts
-      supervisor(WebsiteWeb.Endpoint, [])
-      # Start your own worker by calling: Website.Worker.start_link(arg1, arg2, arg3)
-      # worker(Website.Worker, [arg1, arg2, arg3]),
+      supervisor(WebsiteWeb.Endpoint, []),
+      worker(WebsiteWeb.CallbackBroadcaster, [], name: WebsiteWeb.CallbackBroadcaster)
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

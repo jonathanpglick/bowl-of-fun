@@ -1,5 +1,6 @@
 defmodule WebsiteWeb.PageController do
   use WebsiteWeb, :controller
+  @callback_broadcaster WebsiteWeb.CallbackBroadcaster
 
   def index(conn, _params) do
     render(conn, "index.html")
@@ -10,7 +11,7 @@ defmodule WebsiteWeb.PageController do
   end
 
   def new_game(conn, _params) do
-    shortcode = Bof.new_game()
+    shortcode = Bof.new_game(@callback_broadcaster)
     redirect(conn, to: Routes.page_path(conn, :game_page, shortcode))
   end
 
@@ -29,6 +30,7 @@ defmodule WebsiteWeb.PageController do
 
   def game_not_found(conn) do
     conn
+    |> put_flash(:error, "Game not found")
     |> redirect(to: Routes.page_path(conn, :index))
   end
 end

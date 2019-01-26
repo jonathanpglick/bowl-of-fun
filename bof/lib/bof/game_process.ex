@@ -77,7 +77,7 @@ defmodule Bof.GameProcess do
     {:reply, game_to_external_state(game), game}
   end
 
-  def send_changed(game = %{callback_pid: callback_pid}) when is_pid(callback_pid) do
+  def send_changed(game = %{callback_pid: callback_pid}) when callback_pid != nil do
     send(callback_pid, {:changed, game_to_external_state(game)})
     game
   end
