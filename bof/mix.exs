@@ -20,7 +20,8 @@ defmodule Game.MixProject do
 
   defp deps do
     [
-      {:shortcode, path: "../shortcode"}
+      {:shortcode, path: "../shortcode"},
+      {:jason, "~> 1.1"}
     ]
   end
 end
