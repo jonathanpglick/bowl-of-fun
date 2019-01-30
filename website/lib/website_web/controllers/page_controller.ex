@@ -16,7 +16,7 @@ defmodule WebsiteWeb.PageController do
   end
 
   def game_page(conn, params) do
-    shortcode = Map.get(params, "shortcode")
+    shortcode = Map.get(params, "shortcode") |> String.downcase()
     game_page(conn, params, Bof.state(shortcode))
   end
 

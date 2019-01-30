@@ -1,11 +1,5 @@
-<h1>Game Page</h2>
-<h2>shortcode: <%= @game.shortcode %></h2>
 <script type="text/javascript">
   window.shortcode = "<%= @game.shortcode %>";
 </script>
 
-<a href="<%= Routes.page_path(@conn, :index) %>">Home</a>
-
-<pre>
-<%= {:safe, inspect(@game, pretty: true)} %>
-</pre>
+<div id="game"></div>

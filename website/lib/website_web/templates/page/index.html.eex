@@ -1,8 +1,14 @@
-<h2>Join a game</h2>
-<%= form_for(@conn, Routes.page_path(@conn, :join_game), [], fn f -> %>
-  <%= text_input(f, :shortcode) %>
-  <%= submit("Join") %>
-<% end) %>
+<div class="page--index">
+  <div class="new-game-form">
+  <%= form_for(@conn, Routes.page_path(@conn, :join_game), [], fn f -> %>
+    <h3>Join a game</h3>
+    <div class="new-game-form--layout">
+      <%= text_input(f, :shortcode, placeholder: "Enter game code") %>
+      <%= submit("Join") %>
+    </div>
+  <% end) %>
+  </div>
 
-<h2>- or -</h2>
-<%= button("Start a new game", to: Routes.page_path(@conn, :new_game)) %>
+  <h2 class="or">- or -</h2>
+  <%= button("Start a new game", to: Routes.page_path(@conn, :new_game)) %>
+</div>
