@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addTeam} from "../actionCreators.js";
+import { addTeam, removeTeam, addPaper, startGame } from "../actionCreators.js";
 
 class GamePageInitializing extends Component {
 
@@ -8,18 +8,23 @@ class GamePageInitializing extends Component {
     super(props);
 
     this.teamNameInput = React.createRef();
+    this.paperInput = React.createRef();
+
     this.handleAddTeam = this.handleAddTeam.bind(this);
+    this.handleRemoveTeam = this.handleRemoveTeam.bind(this);
+    this.handleAddPaper = this.handleAddPaper.bind(this);
+    this.handleStartGame = this.handleStartGame.bind(this);
   }
 
   render() {
+    let game = this.props.game;
     return (
       <div>
-        <strong>{this.props.shortcode}</strong>
         <h4>Teams:</h4>
         <ul>
-        {this.props.teams.map(function(team, i) {
+        {game.teams.map((team, i) => {
           return (
-            <li key={i}>{team.name}</li>
+            <li key={i}>{team.name} <a title="Remove" href="#" onClick={(e) => this.handleRemoveTeam(e, team.name)}>&times;</a></li>
           )
         })}
         </ul>
@@ -27,6 +32,15 @@ class GamePageInitializing extends Component {
           <input type="text" name="" placeholder="Team name..." ref={this.teamNameInput} />
           <button type="submit">Add</button>
         </form>
+
+        <hr />
+        <h4>Papers: ({game.paper_count} papers total)</h4>
+        <form onSubmit={this.handleAddPaper}>
+          <input type="text" name="" placeholder="Bono, Smashmouth, Backdoor Jed, etc..." ref={this.paperInput} />
+          <button type="submit">Add</button>
+        </form>
+
+        <button type="submit" disabled={!game.can_start} onClick={this.handleStartGame}>Start Game!</button>
       </div>
     )
 
@@ -37,8 +51,25 @@ class GamePageInitializing extends Component {
     let team_name = this.teamNameInput.current.value;
     this.teamNameInput.current.value = "";
     this.props.dispatch(addTeam(team_name));
-    console.log(team_name);
   }
+
+  handleRemoveTeam(event, team_name) {
+    event.preventDefault();
+    this.props.dispatch(removeTeam(team_name));
+  }
+
+  handleStartGame(event) {
+    event.preventDefault();
+    this.props.dispatch(startGame());
+  }
+
+  handleAddPaper(event) {
+    event.preventDefault();
+    let paper = this.paperInput.current.value;
+    this.paperInput.current.value = "";
+    this.props.dispatch(addPaper(paper));
+  }
+
 
 }
 

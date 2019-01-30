@@ -21,9 +21,9 @@ function onload() {
     function rootReducer(state = {}, action) {
       switch (action.type) {
         case 'STATE':
-          return action.game;
+          return {...state, game: action.game};
         case 'CHANGED':
-          return action.game;
+          return {...state, game: action.game};
         default:
           return state;
       }
@@ -52,9 +52,6 @@ function onload() {
         game: game
       })
     });
-
-    channel.push("STATE");
-
 
     // Bootstrap react.
     render(

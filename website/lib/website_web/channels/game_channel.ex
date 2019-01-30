@@ -35,6 +35,30 @@ defmodule WebsiteWeb.GameChannel do
     {:noreply, socket}
   end
 
+  def handle_in("REMOVE_TEAM", team_name, socket) do
+    socket.assigns.shortcode
+    |> Bof.remove_team(team_name)
+    |> broadcast_changed()
+
+    {:noreply, socket}
+  end
+
+  def handle_in("ADD_PAPER", paper, socket) do
+    socket.assigns.shortcode
+    |> Bof.add_paper(paper)
+    |> broadcast_changed()
+
+    {:noreply, socket}
+  end
+
+  def handle_in("START_GAME", _, socket) do
+    socket.assigns.shortcode
+    |> Bof.start()
+    |> broadcast_changed()
+
+    {:noreply, socket}
+  end
+
   def broadcast_changed(game) do
     WebsiteWeb.Endpoint.broadcast!("game:#{game.shortcode}", "CHANGED", game)
   end

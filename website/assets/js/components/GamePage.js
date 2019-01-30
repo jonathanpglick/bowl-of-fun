@@ -5,8 +5,8 @@ import GamePageInitializing from "./GamePageInitializing";
 class GamePage extends Component {
 
   render() {
-    if ('shortcode' in this.props) {
-      if (this.props.state == "initializing") {
+    if ('game' in this.props) {
+      if (this.props.game.state == "initializing") {
         return this.render_initializing();
       }
     }
@@ -22,7 +22,7 @@ class GamePage extends Component {
 
   render_initializing() {
     return (
-      <GamePageInitializing state={this.props.state} />
+      <GamePageInitializing game={this.props.game} />
     )
   }
 }
