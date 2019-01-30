@@ -25,10 +25,17 @@ defmodule Bof.Game do
     }
   end
 
-  def add_team(game = %Game{teams: teams}, team_name) do
+  def add_team(game = %Game{teams: teams, state: :initializing}, team_name) do
     %Game{
       game
       | teams: teams ++ [%Team{name: team_name}]
+    }
+  end
+
+  def remove_team(game = %Game{teams: teams, state: :initializing}, team_name) do
+    %Game{
+      game
+      | teams: List.delete(teams, %Team{name: team_name})
     }
   end
 
@@ -37,7 +44,7 @@ defmodule Bof.Game do
     |> Enum.at(game.current_team_index)
   end
 
-  def add_paper(game = %Game{papers: papers}, paper) do
+  def add_paper(game = %Game{papers: papers, state: :initializing}, paper) do
     %Game{
       game
       | papers: papers ++ [paper]

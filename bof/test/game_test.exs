@@ -31,6 +31,14 @@ defmodule GameTest do
     assert game.turn_time_left == 60
   end
 
+  test "remove a team" do
+    game = sample_game() |> Game.remove_team("Team 2")
+    assert game.teams == [%Team{name: "Team 1", score: 0}]
+
+    game = sample_game() |> Game.remove_team("Team 1")
+    assert game.teams == [%Team{name: "Team 2", score: 0}]
+  end
+
   test "game turn tick" do
     game = sample_game() |> Game.start() |> Game.turn_start()
 

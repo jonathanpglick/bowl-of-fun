@@ -26,6 +26,13 @@ defmodule Bof do
     |> safe_call({:add_team, team_name})
   end
 
+  def remove_team(%{shortcode: shortcode}, team_name), do: remove_team(shortcode, team_name)
+
+  def remove_team(shortcode, team_name) do
+    via_tuple(shortcode)
+    |> safe_call({:remove_team, team_name})
+  end
+
   def add_paper(%{shortcode: shortcode}, paper), do: add_paper(shortcode, paper)
 
   def add_paper(shortcode, paper) do

@@ -26,6 +26,13 @@ defmodule Bof.GameProcess do
     |> handle_call_return()
   end
 
+  def handle_call({:remove_team, team_name}, _from, game) do
+    game
+    |> Game.remove_team(team_name)
+    |> send_changed()
+    |> handle_call_return()
+  end
+
   def handle_call({:add_paper, paper}, _from, game) do
     game
     |> Game.add_paper(paper)
@@ -91,9 +98,11 @@ defmodule Bof.GameProcess do
       current_team: game |> Game.current_team(),
       round: game.round,
       current_paper: game |> current_paper(),
+      paper_count: game.papers |> length(),
       state: game.state,
       turn_state: game.turn_state,
-      turn_time_left: game.turn_time_left
+      turn_time_left: game.turn_time_left,
+      can_start: game |> Game.can_start?()
     }
   end
 
