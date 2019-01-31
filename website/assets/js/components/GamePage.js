@@ -1,26 +1,36 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import GamePageInitializing from "./GamePageInitializing";
+import GamePageActive from "./GamePageActive";
 
 class GamePage extends Component {
 
   render() {
     if ('game' in this.props) {
       if (this.props.game.state == "initializing") {
-        return this.render_initializing();
+        return this.renderInitializing();
+      }
+      else if (this.props.game.state == "active") {
+        return this.renderActive();
       }
     }
 
-    return this.render_loading();
+    return this.renderLoading();
   }
 
-  render_loading() {
+  renderLoading() {
     return (
       <div>Loading...</div>
     )
   }
 
-  render_initializing() {
+  renderActive() {
+    return (
+      <GamePageActive game={this.props.game} />
+    )
+  }
+
+  renderInitializing() {
     return (
       <GamePageInitializing game={this.props.game} />
     )
@@ -29,11 +39,6 @@ class GamePage extends Component {
 
 function mapStateToProps(state) {
   return state
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-  }
 }
 
 export default connect(mapStateToProps)(GamePage)

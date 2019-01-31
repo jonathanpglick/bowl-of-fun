@@ -13,7 +13,7 @@
         <%= if Map.get(assigns, :game) do %>
           <a class="back-button" href="<%= Routes.page_path(@conn, :index) %>">Back</a>
         <% end %>
-        <h1>Bowl of Fun!</h1>
+        <h1>Bowl of Fun</h1>
         <%= if Map.get(assigns, :game) do %>
           <span class="shortcode">Code: <%= assigns.game.shortcode %></span>
         <% end %>

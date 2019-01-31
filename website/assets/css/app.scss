@@ -104,3 +104,60 @@ header {
     }
   }
 }
+
+.scores-round {
+  display: flex;
+
+  > * {
+    flex-grow: 1;
+  }
+
+  h5 {
+    margin: 0;
+  }
+  span {
+    font-weight: bold;
+  }
+}
+
+.current-round {
+  text-align: center;
+}
+
+.next-up {
+  margin-top: 5rem;
+  text-align: center;
+
+  h4 {
+    margin-bottom: 3rem;
+  }
+}
+
+ul.scores {
+  list-style: none;
+  margin: 0;
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    & + li {}
+
+    &.current {
+      position: relative;
+      &:before {
+        $size: 5px;
+        content: '';
+        position: absolute;
+        top: 2 + $size;
+        left: -2 * $size;
+        width: 0;
+        height: 0;
+        border-top: $size solid transparent;
+        border-left: $size solid #000;
+        border-bottom: $size solid transparent;
+        border-right: 0px;
+      }
+    }
+  }
+}
