@@ -11,7 +11,7 @@
     <header>
       <div class="container">
         <%= if Map.get(assigns, :game) do %>
-          <a class="back-button" href="<%= Routes.page_path(@conn, :index) %>">Back</a>
+          <a class="back-button" href="<%= Routes.page_path(@conn, :index) %>">Home</a>
         <% end %>
         <h1>Bowl of Fun</h1>
         <%= if Map.get(assigns, :game) do %>

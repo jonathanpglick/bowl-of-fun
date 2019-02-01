@@ -45,9 +45,15 @@ class GamePageActive extends Component {
 
   render_active_with_paper() {
     let game = this.props.game;
+    let roundName = roundInfo[game.round];
     return (
       <div className="game-page--active--with-paper">
-        <Countdown timeLeft={game.turn_time_left} />
+        <div className="countdown-and-round">
+          <Countdown timeLeft={game.turn_time_left} />
+          <div className="round">
+            <h2>{roundName}</h2>
+          </div>
+        </div>
         <div className="paper-wrapper">
           <Paper paper={game.current_paper} />
         </div>
@@ -58,6 +64,7 @@ class GamePageActive extends Component {
 
   render_active() {
     let game = this.props.game;
+    let roundName = roundInfo[game.round];
     return (
       <div className="game-page--active">
         <Countdown timeLeft={game.turn_time_left} />
@@ -77,25 +84,31 @@ class GamePageActive extends Component {
   }
 
 }
+let roundInfo = {
+  "taboo": "Taboo",
+  "charades": "Charades",
+  "one_word": "One Word"
+}
 
 function CurrentRound(props) {
-  let humanRound = {
-    "taboo": "Taboo",
-    "charades": "Charades",
-    "one_word": "One Word"
-  }[props.currentRound];
+  let roundName = roundInfo[props.currentRound];
   return (
     <div className="current-round">
       <h5>Round:</h5>
-      <span>{humanRound}</span>
+      <span>{roundName}</span>
     </div>
   )
 }
 
 function Paper(props) {
   let version = (props.paper.charCodeAt(0) % 2 == 0) ? 'v1' : 'v2';
+  let classNames = "paper";
+  if (props.paper.length < 12) {
+    classNames = classNames + " large";
+  }
+
   return (
-    <div className="paper">
+    <div className={classNames}>
       <div className="paper-inner" data-version={version}>
         <span className="paper-text">{props.paper}</span>
       </div>
