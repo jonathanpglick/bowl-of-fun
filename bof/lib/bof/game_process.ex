@@ -51,6 +51,13 @@ defmodule Bof.GameProcess do
     |> handle_call_return()
   end
 
+  def handle_call({:play_again}, _from, game) do
+    game
+    |> Game.play_again()
+    |> send_changed()
+    |> handle_call_return()
+  end
+
   def handle_call({:turn_start}, _from, game) do
     game
     |> Game.turn_start()

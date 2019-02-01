@@ -54,6 +54,13 @@ defmodule Bof do
     |> safe_call({:start})
   end
 
+  def play_again(%{shortcode: shortcode}), do: play_again(shortcode)
+
+  def play_again(shortcode) do
+    via_tuple(shortcode)
+    |> safe_call({:play_again})
+  end
+
   def turn_start(%{shortcode: shortcode}), do: turn_start(shortcode)
 
   def turn_start(shortcode) do

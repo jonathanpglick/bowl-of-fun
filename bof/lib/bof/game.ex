@@ -25,6 +25,14 @@ defmodule Bof.Game do
     }
   end
 
+  def play_again(game = %Game{}) do
+    %Game{
+      callback_pid: game.callback_pid,
+      shortcode: game.shortcode,
+      teams: Enum.map(game.teams, fn team -> %Team{name: team.name} end)
+    }
+  end
+
   def add_team(game = %Game{teams: teams, state: :initializing}, team_name) do
     %Game{
       game
