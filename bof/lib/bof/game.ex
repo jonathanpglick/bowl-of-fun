@@ -15,7 +15,8 @@ defmodule Bof.Game do
     round_papers: [],
     # | :active | :complete
     turn_state: :pending,
-    turn_time_left: 60
+    turn_time_left: 60,
+    turn_started_by: nil
   )
 
   def new(shortcode \\ nil, callback_pid \\ nil) do
@@ -91,8 +92,8 @@ defmodule Bof.Game do
     game
   end
 
-  def turn_start(game = %Game{turn_state: :pending}) do
-    %Game{game | turn_state: :active, turn_time_left: 60}
+  def turn_start(game = %Game{turn_state: :pending}, started_by \\ nil) do
+    %Game{game | turn_state: :active, turn_time_left: 60, turn_started_by: started_by}
   end
 
   def turn_tick(game = %Game{turn_time_left: 0}) do

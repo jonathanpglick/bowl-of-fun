@@ -1,5 +1,6 @@
 <script type="text/javascript">
   window.shortcode = "<%= @game.shortcode %>";
+  window.uid = "<%= @uid %>";
 </script>
 
 <div id="game"></div>

@@ -56,7 +56,7 @@ function onload() {
     // Bootstrap react.
     render(
       <Provider store={store}>
-        <GamePage />
+        <GamePage uid={window.uid} />
       </Provider>
       , document.getElementById("game")
     );

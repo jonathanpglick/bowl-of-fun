@@ -61,11 +61,12 @@ defmodule Bof do
     |> safe_call({:play_again})
   end
 
-  def turn_start(%{shortcode: shortcode}), do: turn_start(shortcode)
+  def turn_start(%{shortcode: shortcode}, started_by \\ nil),
+    do: turn_start(shortcode, started_by)
 
-  def turn_start(shortcode) do
+  def turn_start(shortcode, started_by) do
     via_tuple(shortcode)
-    |> safe_call({:turn_start})
+    |> safe_call({:turn_start, started_by})
   end
 
   def paper_guessed(%{shortcode: shortcode}), do: paper_guessed(shortcode)

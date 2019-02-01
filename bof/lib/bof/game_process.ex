@@ -58,9 +58,9 @@ defmodule Bof.GameProcess do
     |> handle_call_return()
   end
 
-  def handle_call({:turn_start}, _from, game) do
+  def handle_call({:turn_start, started_by}, _from, game) do
     game
-    |> Game.turn_start()
+    |> Game.turn_start(started_by)
     |> send_changed()
     |> set_tick()
     |> handle_call_return()
@@ -109,7 +109,8 @@ defmodule Bof.GameProcess do
       state: game.state,
       turn_state: game.turn_state,
       turn_time_left: game.turn_time_left,
-      can_start: game |> Game.can_start?()
+      can_start: game |> Game.can_start?(),
+      turn_started_by: game.turn_started_by
     }
   end
 

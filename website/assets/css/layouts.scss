@@ -53,6 +53,22 @@
   flex-direction: column;
 }
 
+.game-page--active {
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  .countdown {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    font-size: 12rem;
+    line-height: 1em;
+    text-align: center;
+    display: block;
+  }
+}
+
 .game-page--active--with-paper {
   text-align: center;
   flex-grow: 1;
@@ -60,7 +76,7 @@
   flex-direction: column;
 
   .countdown {
-    font-size: 3rem;
+    font-size: 6rem;
     line-height: 1em;
     text-align: center;
     display: block;
@@ -72,7 +88,7 @@
     display: flex;
     align-items: center;
     .paper {
-      margin-top: -5rem;
+      margin-top: -15rem;
     }
   }
 

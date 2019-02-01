@@ -4,7 +4,8 @@ defmodule WebsiteWeb.UserSocket do
   ## Channels
   channel("game:*", WebsiteWeb.GameChannel)
 
-  def connect(_params, socket, _connect_info) do
+  def connect(params, socket, _connect_info) do
+    socket = socket |> assign(:uid, params["uid"])
     {:ok, socket}
   end
 

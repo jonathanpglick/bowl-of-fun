@@ -1,5 +1,6 @@
 defmodule WebsiteWeb.PageController do
   use WebsiteWeb, :controller
+
   @callback_broadcaster WebsiteWeb.CallbackBroadcaster
 
   def index(conn, _params) do
@@ -7,7 +8,8 @@ defmodule WebsiteWeb.PageController do
   end
 
   def join_game(conn, params) do
-    game_page(conn, params)
+    shortcode = Map.get(params, "shortcode") |> String.downcase()
+    redirect(conn, to: Routes.page_path(conn, :game_page, shortcode))
   end
 
   def new_game(conn, _params) do
@@ -25,7 +27,8 @@ defmodule WebsiteWeb.PageController do
   end
 
   def game_page(conn, _params, game) do
-    render(conn, "game_page.html", game: game)
+    uid = conn.req_cookies["_website_key"]
+    render(conn, "game_page.html", game: game, uid: uid)
   end
 
   def game_not_found(conn) do

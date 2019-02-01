@@ -18,7 +18,12 @@ class GamePageActive extends Component {
       return this.render_pending()
     }
     else if (game.turn_state == "active") {
-      return this.render_active()
+      if (game.turn_started_by == this.props.uid) {
+        return this.render_active_with_paper()
+      }
+      else {
+        return this.render_active()
+      }
     }
   }
 
@@ -38,7 +43,7 @@ class GamePageActive extends Component {
     )
   }
 
-  render_active() {
+  render_active_with_paper() {
     let game = this.props.game;
     return (
       <div className="game-page--active--with-paper">
@@ -47,6 +52,16 @@ class GamePageActive extends Component {
           <Paper paper={game.current_paper} />
         </div>
         <button type="submit" onClick={this.handlePaperGuessed}>Guessed, draw next!</button>
+      </div>
+    )
+  }
+
+  render_active() {
+    let game = this.props.game;
+    return (
+      <div className="game-page--active">
+        <Countdown timeLeft={game.turn_time_left} />
+        <h2>Team <strong>{game.current_team.name}</strong> guessing</h2>
       </div>
     )
   }

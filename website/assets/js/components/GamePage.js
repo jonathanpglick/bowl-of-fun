@@ -36,7 +36,7 @@ class GamePage extends Component {
 
   renderActive() {
     return (
-      <GamePageActive dispatch={this.props.dispatch} game={this.props.game} />
+      <GamePageActive dispatch={this.props.dispatch} game={this.props.game} uid={this.props.uid} />
     )
   }
 

@@ -1,7 +1,7 @@
 defmodule WebsiteWeb.GameChannel do
   use Phoenix.Channel
 
-  def join("game:" <> shortcode, _, socket) do
+  def join("game:" <> shortcode, _params, socket) do
     socket = socket |> assign(:shortcode, shortcode)
     send(self(), :after_join)
     {:ok, socket}
@@ -61,7 +61,7 @@ defmodule WebsiteWeb.GameChannel do
 
   def handle_in("START_TURN", _, socket) do
     socket.assigns.shortcode
-    |> Bof.turn_start()
+    |> Bof.turn_start(socket.assigns.uid)
     |> broadcast_changed()
 
     {:noreply, socket}
