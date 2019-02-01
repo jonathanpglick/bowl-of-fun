@@ -30,8 +30,8 @@ class GamePageActive extends Component {
           <CurrentRound currentRound={game.round} />
         </div>
         <div className="next-up">
-          <h4><strong>{game.current_team.name}</strong>, you're up!</h4>
-          <button type="submit" onClick={this.handleStartTurn}>Start Your Turn!</button>
+          <h2><strong>{game.current_team.name}</strong>, you're up!</h2>
+          <button type="submit" onClick={this.handleStartTurn}>Start Your Turn</button>
         </div>
       </div>
     )
@@ -91,7 +91,7 @@ function Paper(props) {
 function Countdown(props) {
   var classes = "countdown ";
   let timeLeft = props.timeLeft;
-  if (timeLeft <= 10 && timeLeft % 2 == 0) {
+  if (timeLeft <= 10) {
     classes = classes + " warning";
   }
   return (

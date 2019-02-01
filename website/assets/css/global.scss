@@ -1,6 +1,7 @@
 
 html {
   height: 100%;
+  background: #93a5c6;
 }
 body {
   margin: 0;
@@ -11,6 +12,7 @@ body {
 
   header {}
   main {
+  	z-index: 10;
     flex-grow: 1;
     padding-top: $container-padding;
     padding-bottom: $container-padding;
@@ -20,6 +22,8 @@ body {
 }
 
 header {
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.2);
   > div {
     position: relative;
 
@@ -50,4 +54,14 @@ header {
 #game {
   flex-grow: 1;
   display: flex;
+}
+
+.bowl-img {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+input[type='text'] {
+	background-color: #FFFFFF;
 }

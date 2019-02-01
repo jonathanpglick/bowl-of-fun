@@ -53,10 +53,22 @@ defmodule Bof.Game do
   end
 
   def add_paper(game = %Game{papers: papers, state: :initializing}, paper) do
-    %Game{
-      game
-      | papers: papers ++ [paper]
-    }
+    paper = String.trim(paper)
+
+    case String.length(paper) do
+      0 ->
+        game
+
+      _ ->
+        %Game{
+          game
+          | papers: papers ++ [paper]
+        }
+    end
+  end
+
+  def add_paper(game = %Game{}, _paper) do
+    game
   end
 
   def can_start?(%Game{papers: papers, teams: teams})

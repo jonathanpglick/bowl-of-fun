@@ -71,6 +71,9 @@
     flex-grow: 1;
     display: flex;
     align-items: center;
+    .paper {
+      margin-top: -5rem;
+    }
   }
 
   button {

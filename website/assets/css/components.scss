@@ -23,8 +23,8 @@
   margin-top: 5rem;
   text-align: center;
 
-  h4 {
-    margin-bottom: 3rem;
+  h2 {
+    margin-bottom: 4rem;
   }
 }
 
@@ -73,28 +73,35 @@ ul.scores {
   line-height: 1.1em;
   text-align: center;
   width: auto;
-  min-width: 60%;
+  min-width: 30%;
   margin: 0 auto;
 
-  filter: drop-shadow(0px 2px 5px #aaa);
+  filter: drop-shadow(0px 2px 5px #666);
 
   .paper-inner {
     clip-path: polygon(0.5% 2%, 99% 0%, 100% 99%, 0% 99%);
     background: #FFFFFF;
 
-    [data-version="v2"] {
+    &[data-version="v2"] {
       clip-path: polygon(0% 0%, 100% 2%, 99% 99%, 0.5% 100%);
     }
   }
 
   .paper-text {
     display: block;
-    padding: 1rem 1rem;
+    padding: 1rem 2rem;
+  }
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
   }
 }
 
 .countdown {
   &.warning {
     color: red;
+    animation: blinker 0.75s step-start infinite;
   }
 }
