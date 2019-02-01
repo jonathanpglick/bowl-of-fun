@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actionCreators";
 import Scores from "./Scores";
+import beep from "../beeper";
 
 class GamePageActive extends Component {
 
@@ -93,6 +94,18 @@ function Countdown(props) {
   let timeLeft = props.timeLeft;
   if (timeLeft <= 10) {
     classes = classes + " warning";
+  }
+  if (timeLeft == 1) {
+    beep(300, 650, 1, 'sawtooth', function() {
+      beep(300, 650, 1, 'sawtooth', function() {
+        beep(300, 650, 1, 'sawtooth', function() {
+          beep(300, 650, 1, 'sawtooth', function() {
+            beep(300, 650, 1, 'sawtooth', function() {
+            });
+          });
+        });
+      });
+    });
   }
   return (
     <strong className={classes}>{props.timeLeft}</strong>
