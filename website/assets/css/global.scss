@@ -1,0 +1,53 @@
+
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  header {}
+  main {
+    flex-grow: 1;
+    padding-top: $container-padding;
+    padding-bottom: $container-padding;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+header {
+  > div {
+    position: relative;
+
+    h1 {
+      text-align: center;
+      margin-bottom: 0;
+      font-size: $header-title-size;
+      line-height: $header-title-line-height;
+    }
+
+    .back-button,
+    .shortcode {
+      position: absolute;
+      top: 0;
+      height: $header-title-line-height;
+      line-height: $header-title-line-height;
+    }
+    .back-button {
+      left: $container-padding;
+    }
+
+    .shortcode {
+      right: $container-padding;
+    }
+  }
+}
+
+#game {
+  flex-grow: 1;
+  display: flex;
+}

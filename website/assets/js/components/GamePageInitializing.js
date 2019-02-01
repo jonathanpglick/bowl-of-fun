@@ -19,28 +19,28 @@ class GamePageInitializing extends Component {
   render() {
     let game = this.props.game;
     return (
-      <div>
+      <div className="game-page--initializing">
         <h4>Teams:</h4>
-        <ul>
+        <ul className="teams">
         {game.teams.map((team, i) => {
           return (
             <li key={i}>{team.name} <a title="Remove" href="#" onClick={(e) => this.handleRemoveTeam(e, team.name)}>&times;</a></li>
           )
         })}
         </ul>
-        <form onSubmit={this.handleAddTeam}>
+        <form onSubmit={this.handleAddTeam} className="form-horizontal">
           <input type="text" name="" placeholder="Team name..." ref={this.teamNameInput} />
           <button type="submit">Add</button>
         </form>
 
         <hr />
-        <h4>Papers: ({game.paper_count} papers total)</h4>
-        <form onSubmit={this.handleAddPaper}>
-          <input type="text" name="" placeholder="Bono, Smashmouth, Backdoor Jed, etc..." ref={this.paperInput} />
+        <h4>Papers: ({game.paper_count} total)</h4>
+        <form onSubmit={this.handleAddPaper} className="form-horizontal">
+          <input type="text" name="" placeholder="Smashmouth, Backdoor Jed, etc..." ref={this.paperInput} />
           <button type="submit">Add</button>
         </form>
 
-        <button type="submit" disabled={!game.can_start} onClick={this.handleStartGame}>Start Game!</button>
+        <button type="submit" className="start-game-button" disabled={!game.can_start} onClick={this.handleStartGame}>Start Game!</button>
       </div>
     )
 
@@ -51,6 +51,7 @@ class GamePageInitializing extends Component {
     let team_name = this.teamNameInput.current.value;
     this.teamNameInput.current.value = "";
     this.props.dispatch(addTeam(team_name));
+    this.teamNameInput.current.focus();
   }
 
   handleRemoveTeam(event, team_name) {
@@ -68,13 +69,10 @@ class GamePageInitializing extends Component {
     let paper = this.paperInput.current.value;
     this.paperInput.current.value = "";
     this.props.dispatch(addPaper(paper));
+    this.paperInput.current.focus();
   }
 
 
 }
 
-function mapStateToProps(state) {
-  return state
-}
-
-export default connect(mapStateToProps)(GamePageInitializing)
+export default GamePageInitializing

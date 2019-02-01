@@ -18,6 +18,15 @@ export function createChannelMiddleware(channel) {
       case "START_GAME": 
         push(channel, action.type);
         return;
+      case "START_TURN": 
+        push(channel, action.type);
+        return;
+      case "PAPER_GUESSED": 
+        push(channel, action.type);
+        return;
+      case "PLAY_AGAIN": 
+        push(channel, action.type);
+        return;
       default:
         next(action);
     }

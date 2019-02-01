@@ -1,0 +1,37 @@
+
+.container{
+  margin: 0 auto;
+  max-width: 80.0rem;
+  padding-left: $container-padding;
+  padding-right: $container-padding;
+  position: relative;
+  width: 100%
+}
+
+.form-horizontal {
+  display: flex;
+
+  > * {
+    margin-bottom: 0;
+  }
+
+  > * + * {
+    margin-left: 1rem;
+  }
+
+  button,
+  input[type="submit"]
+  .button {
+    flex-grow: 0;
+  }
+}
+
+.jumbo {
+	padding: 1rem;
+	background-color: #eee;
+	border-radius: 5px;
+}
+
+.center-text {
+	text-align: center;
+}

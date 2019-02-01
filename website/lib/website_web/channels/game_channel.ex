@@ -59,6 +59,30 @@ defmodule WebsiteWeb.GameChannel do
     {:noreply, socket}
   end
 
+  def handle_in("START_TURN", _, socket) do
+    socket.assigns.shortcode
+    |> Bof.turn_start()
+    |> broadcast_changed()
+
+    {:noreply, socket}
+  end
+
+  def handle_in("PAPER_GUESSED", _, socket) do
+    socket.assigns.shortcode
+    |> Bof.paper_guessed()
+    |> broadcast_changed()
+
+    {:noreply, socket}
+  end
+
+  def handle_in("PLAY_AGAIN", _, socket) do
+    socket.assigns.shortcode
+    |> Bof.play_again()
+    |> broadcast_changed()
+
+    {:noreply, socket}
+  end
+
   def broadcast_changed(game) do
     WebsiteWeb.Endpoint.broadcast!("game:#{game.shortcode}", "CHANGED", game)
   end

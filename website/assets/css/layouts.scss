@@ -1,0 +1,83 @@
+.page--index {
+  text-align: center;
+
+  h2 {
+    margin-bottom: 0;
+  }
+
+  h3 {
+    margin-bottom: 1rem;
+  }
+
+
+  button {
+    margin-bottom: 0;
+  }
+
+  .or {
+    margin-top: $container-padding;
+    margin-bottom: $container-padding;
+  }
+}
+
+.game-page--initializing {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  h4 {
+    margin-bottom: 1rem;
+  }
+
+  .teams {
+    margin: 0 0 1rem 0;
+    padding: 0;
+
+    li {
+      margin-bottom: 0;
+    }
+  }
+
+  form {
+    margin-bottom: 0;
+  }
+
+  .start-game-button {
+    margin-top: 5rem;
+  }
+}
+
+.game-page--active {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-page--active--with-paper {
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  .countdown {
+    font-size: 3rem;
+    line-height: 1em;
+    text-align: center;
+    display: block;
+    flex-grow: 0;
+  }
+
+  .paper-wrapper {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  button {
+    margin-bottom: 0;
+  }
+}
+
+.game-page--finished {
+  flex-grow: 1;
+}

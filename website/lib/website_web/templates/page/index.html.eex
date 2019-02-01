@@ -2,7 +2,7 @@
   <div class="new-game-form">
   <%= form_for(@conn, Routes.page_path(@conn, :join_game), [], fn f -> %>
     <h3>Join a game</h3>
-    <div class="new-game-form--layout">
+    <div class="form-horizontal">
       <%= text_input(f, :shortcode, placeholder: "Enter game code") %>
       <%= submit("Join") %>
     </div>

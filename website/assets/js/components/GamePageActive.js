@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addTeam, removeTeam, addPaper, startGame } from "../actionCreators.js";
+import * as actions from "../actionCreators";
+import Scores from "./Scores";
 
 class GamePageActive extends Component {
 
   constructor(props) {
     super(props);
+    this.handleStartTurn = this.handleStartTurn.bind(this);
+    this.handlePaperGuessed = this.handlePaperGuessed.bind(this);
   }
 
   render() {
@@ -13,42 +16,50 @@ class GamePageActive extends Component {
     if (game.turn_state == "pending") {
       return this.render_pending()
     }
+    else if (game.turn_state == "active") {
+      return this.render_active()
+    }
   }
 
   render_pending() {
     let game = this.props.game;
     return (
-      <div>
-        <div className="scores-round">
-          <Scores teams={game.teams} currentTeam={game.current_team} />
+      <div className="game-page--active">
+        <div className="scores-round jumbo">
+          <Scores teams={game.teams} highlight={[game.current_team]} />
           <CurrentRound currentRound={game.round} />
         </div>
         <div className="next-up">
-          <h4>{game.current_team.name}, you're up!</h4>
-          <button type="submit">Start Your Turn!</button>
+          <h4><strong>{game.current_team.name}</strong>, you're up!</h4>
+          <button type="submit" onClick={this.handleStartTurn}>Start Your Turn!</button>
         </div>
       </div>
     )
   }
 
-}
-
-export default GamePageActive
-
-function Scores(props) {
-    let teams = props.teams;
-    let currentTeam = props.currentTeam;
+  render_active() {
+    let game = this.props.game;
     return (
-      <ul className="scores">
-        {teams.map((team, i) => {
-          let className = (team.name == currentTeam.name) ? 'current' : '';
-          return (
-            <li key={i} className={className}>{team.name}: {team.score}</li>
-          )
-        })}
-      </ul>
+      <div className="game-page--active--with-paper">
+        <Countdown timeLeft={game.turn_time_left} />
+        <div className="paper-wrapper">
+          <Paper paper={game.current_paper} />
+        </div>
+        <button type="submit" onClick={this.handlePaperGuessed}>Guessed, draw next!</button>
+      </div>
     )
-  u
+  }
+
+  handleStartTurn(event) {
+    event.preventDefault();
+    this.props.dispatch(actions.startTurn());
+  }
+
+  handlePaperGuessed(event) {
+    event.preventDefault();
+    this.props.dispatch(actions.paperGuessed());
+  }
+
 }
 
 function CurrentRound(props) {
@@ -64,3 +75,28 @@ function CurrentRound(props) {
     </div>
   )
 }
+
+function Paper(props) {
+  let version = (props.paper.charCodeAt(0) % 2 == 0) ? 'v1' : 'v2';
+  return (
+    <div className="paper">
+      <div className="paper-inner" data-version={version}>
+        <span className="paper-text">{props.paper}</span>
+      </div>
+    </div>
+  )
+}
+
+
+function Countdown(props) {
+  var classes = "countdown ";
+  let timeLeft = props.timeLeft;
+  if (timeLeft <= 10 && timeLeft % 2 == 0) {
+    classes = classes + " warning";
+  }
+  return (
+    <strong className={classes}>{props.timeLeft}</strong>
+  )
+}
+
+export default GamePageActive

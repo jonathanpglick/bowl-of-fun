@@ -25,3 +25,21 @@ export function startGame() {
     type: 'START_GAME'
   }
 }
+
+export function startTurn() {
+  return {
+    type: 'START_TURN'
+  }
+}
+
+export function paperGuessed() {
+  return {
+    type: 'PAPER_GUESSED'
+  }
+}
+
+export function playAgain() {
+  return {
+    type: 'PLAY_AGAIN'
+  }
+}
