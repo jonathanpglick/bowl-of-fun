@@ -38,30 +38,27 @@
 
   .teams {
     margin: 0 0 1rem 0;
-    padding: 0;
-
-    li {
-      margin-bottom: 0;
-    }
   }
 
   form {
     margin-bottom: 0;
   }
 
-  .start-game-button {
+  .start-button-wrapper {
     margin-top: 5rem;
+    p {
+      margin-bottom: 1em;
+    }
+
+    .start-game-button {
+      margin-bottom: 0;
+      display: block;
+      width: 100%;
+    }
   }
 }
 
 .game-page--active {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.game-page--active {
-  text-align: center;
   flex-grow: 1;
   display: flex;
   flex-direction: column;

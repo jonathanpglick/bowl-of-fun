@@ -27,11 +27,16 @@
 }
 
 .jumbo {
-	padding: 1rem;
-	background-color: #eee;
-	border-radius: 5px;
+  padding: 1rem;
+  background-color: #eee;
+  border-radius: 5px;
 }
 
 .center-text {
-	text-align: center;
+  text-align: center;
+}
+
+.help-text {
+  font-size: 1.5rem;
+  line-height: 1.2em;
 }

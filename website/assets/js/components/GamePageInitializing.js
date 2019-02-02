@@ -21,13 +21,7 @@ class GamePageInitializing extends Component {
     return (
       <div className="game-page--initializing">
         <h4>Teams:</h4>
-        <ul className="teams">
-        {game.teams.map((team, i) => {
-          return (
-            <li key={i}>{team.name} <a title="Remove" href="#" onClick={(e) => this.handleRemoveTeam(e, team.name)}>&times;</a></li>
-          )
-        })}
-        </ul>
+        {this.renderTeamsList(game.teams)}
         <form onSubmit={this.handleAddTeam} className="form-horizontal">
           <input type="text" name="" placeholder="Team name..." ref={this.teamNameInput} />
           <button type="submit">Add</button>
@@ -40,10 +34,35 @@ class GamePageInitializing extends Component {
           <button type="submit">Add</button>
         </form>
 
-        <button type="submit" className="start-game-button" disabled={!game.can_start} onClick={this.handleStartGame}>Start Game!</button>
+        <div className="start-button-wrapper jumbo">
+          <p className="help-text">Once all the teams have been created and everyone has submitted their papers, click below to start the game!</p>
+          <button type="submit" className="start-game-button" disabled={!game.can_start} onClick={this.handleStartGame}>Start Game!</button>
+        </div>
       </div>
     )
 
+  }
+
+  renderTeamsList(teams) {
+    if (teams.length) {
+      return (
+        <div className="jumbo teams">
+          <ul className="scores">
+          {teams.map((team, i) => {
+            return (
+              <li key={i}>
+                <span className="team-name">{team.name}</span>
+                <a title="Remove" href="#" onClick={(e) => this.handleRemoveTeam(e, team.name)}>&times;</a>
+              </li>
+            )
+          })}
+          </ul>
+        </div>
+      )
+    }
+    else {
+      return undefined;
+    }
   }
 
   handleAddTeam(event) {
