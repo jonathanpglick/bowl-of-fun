@@ -61,7 +61,8 @@ defmodule Bof do
     |> safe_call({:play_again})
   end
 
-  def turn_start(%{shortcode: shortcode}, started_by \\ nil),
+  def turn_start(a, started_by \\ nil)
+  def turn_start(%{shortcode: shortcode}, started_by),
     do: turn_start(shortcode, started_by)
 
   def turn_start(shortcode, started_by) do
