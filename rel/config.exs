@@ -46,7 +46,7 @@ end
 # when running `mix release`, the first release in the file
 # will be used by default
 
-release :repo do
+release :bowl_of_fun do
   set version: "0.1.0"
   set applications: [
     :runtime_tools,
