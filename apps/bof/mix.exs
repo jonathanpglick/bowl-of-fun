@@ -20,7 +20,7 @@ defmodule Game.MixProject do
 
   defp deps do
     [
-      {:shortcode, path: "../shortcode"},
+      {:shortcode, in_umbrella: true},
       {:jason, "~> 1.1"}
     ]
   end
