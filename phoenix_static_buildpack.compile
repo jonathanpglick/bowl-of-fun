@@ -2,4 +2,5 @@ cd $assets_dir
 node_modules/.bin/webpack -p
 
 cd $phoenix_dir
+mix deps.get
 mix "${phoenix_ex}.digest"
