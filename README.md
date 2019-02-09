@@ -3,6 +3,10 @@
 A web application to play Bowl of Fun with your friends from your
 smartphone(s).
 
+## Installation
+
+    mix deps.get
+
 ## Run Locally
 
     mix phx.server
