@@ -52,4 +52,3 @@ The Elixir version to use is outlined in `elixir_buildpack.config`.
 
 The `compile` step of the `phoenix_static_buildpack` has been overwritten to
 support webpack in Phoenix 1.4.
-
