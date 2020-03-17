@@ -24,6 +24,7 @@ This project uses an umbrella project to bring together the three indepenent
 apps that comprise this website.
 
 
+
 ### `apps/bof`
 
 The core implementation of the Bowl of Fun game.
